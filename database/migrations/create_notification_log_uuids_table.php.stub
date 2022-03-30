@@ -8,11 +8,11 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('trustup_pro_notifier_table', function (Blueprint $table) {
+        Schema::create('notification_log_uuids', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->string('notification_id');
+            $table->string('driver');
+            $table->string('uuid');
             $table->timestamps();
         });
     }
