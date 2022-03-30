@@ -2,12 +2,8 @@
 
 namespace Deegitalbe\TrustupProNotifier\Notifications\Channels;
 
-use Illuminate\Support\Facades\Http;
-use Illuminate\Notifications\Notification;
-
 class TPNSMSChannel extends TPNBaseChannel implements TPNChannelInterface
 {
-    
     public function getType(): string
     {
         return 'sms';
@@ -22,5 +18,4 @@ class TPNSMSChannel extends TPNBaseChannel implements TPNChannelInterface
     {
         return 'routeNotificationForTPNSMS';
     }
-
 }

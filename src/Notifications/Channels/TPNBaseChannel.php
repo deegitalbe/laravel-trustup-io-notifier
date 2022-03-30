@@ -3,28 +3,27 @@
 namespace Deegitalbe\TrustupProNotifier\Notifications\Channels;
 
 use Exception;
-use Ramsey\Uuid\Uuid;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Notifications\Notification;
+use Ramsey\Uuid\Uuid;
 
 abstract class TPNBaseChannel
 {
-
     public function getTo(array $message, $notifiable): ?string
     {
-        if ( isset($message['to']) && $message['to'] ) {
+        if (isset($message['to']) && $message['to']) {
             return $message['to'];
         }
 
-        if ( method_exists($notifiable, $this->getRouteMethod()) ) {
+        if (method_exists($notifiable, $this->getRouteMethod())) {
             return $notifiable->{$this->getRouteMethod()}();
         }
-        
+
         return null;
     }
-    
+
     /**
      * Send the given notification.
      *
@@ -37,7 +36,7 @@ abstract class TPNBaseChannel
         $method = $this->getMethod();
         $message = $notification->{$method}($notifiable);
 
-        if ( ! isset($message['uuid']) ) {
+        if (! isset($message['uuid'])) {
             $message['uuid'] = (string) Uuid::uuid4();
         }
 
@@ -45,7 +44,7 @@ abstract class TPNBaseChannel
             ->withoutVerifying()
             ->withHeaders([
                 'X-App-Name' => config('trustup-pro-notifier.app'),
-                'X-App-Key'  => config('trustup-pro-notifier.key'),
+                'X-App-Key' => config('trustup-pro-notifier.key'),
             ])->post(
                 config('trustup-pro-notifier.url').'/api/notify/'.$this->getType(),
                 array_merge(
@@ -53,23 +52,22 @@ abstract class TPNBaseChannel
                     [
                         'to' => $this->getTo($message, $notifiable),
                         'notifiable_id' => $notifiable->id,
-                        'notifiable_type' => $notifiable->getMorphClass(), 
-                        'notification_class' => get_class($notification)
+                        'notifiable_type' => $notifiable->getMorphClass(),
+                        'notification_class' => get_class($notification),
                     ]
                 )
             );
-            
-        if ( ! $response->ok() ) {
+
+        if (! $response->ok()) {
             throw new Exception('Could not send notification ['.$this->getType().'] via ' . config('trustup-pro-notifier.url'));
         }
 
-        if ( Schema::hasTable('notification_log_uuids') ) {
+        if (Schema::hasTable('notification_log_uuids')) {
             DB::table('notification_log_uuids')->insert([
                 'notification_id' => $notification->id,
-                'driver'          => $this->getType(),
-                'uuid'            => $message['uuid']
+                'driver' => $this->getType(),
+                'uuid' => $message['uuid'],
             ]);
         }
     }
-
 }

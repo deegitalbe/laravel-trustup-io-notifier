@@ -2,14 +2,13 @@
 
 namespace Deegitalbe\TrustupProNotifier;
 
-use Spatie\LaravelPackageTools\Package;
-use Illuminate\Support\Facades\Notification;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Deegitalbe\TrustupProNotifier\Commands\TrustupProNotifierCommand;
-use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNSMSChannel;
-use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNPushChannel;
 use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNEmailChannel;
 use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNLetterChannel;
+use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNPushChannel;
+use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNSMSChannel;
+use Illuminate\Support\Facades\Notification;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class TrustupProNotifierServiceProvider extends PackageServiceProvider
 {
