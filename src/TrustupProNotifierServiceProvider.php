@@ -2,9 +2,9 @@
 
 namespace Deegitalbe\TrustupProNotifier;
 
+use Deegitalbe\TrustupProNotifier\Commands\TrustupProNotifierCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Deegitalbe\TrustupProNotifier\Commands\TrustupProNotifierCommand;
 
 class TrustupProNotifierServiceProvider extends PackageServiceProvider
 {

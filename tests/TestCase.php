@@ -2,9 +2,9 @@
 
 namespace Deegitalbe\TrustupProNotifier\Tests;
 
+use Deegitalbe\TrustupProNotifier\TrustupProNotifierServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Deegitalbe\TrustupProNotifier\TrustupProNotifierServiceProvider;
 
 class TestCase extends Orchestra
 {
