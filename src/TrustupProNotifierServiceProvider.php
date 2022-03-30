@@ -23,8 +23,7 @@ class TrustupProNotifierServiceProvider extends PackageServiceProvider
         $package
             ->name('trustup-pro-notifier')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('notification_log_uuids');
+            ->hasMigration('create_notification_log_uuids_table');
     }
 
     public function packageBooted()
