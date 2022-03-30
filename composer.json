@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "deegitalbe/trustup-pro-notifier",
+    "description": "This is my package trustup-pro-notifier",
     "keywords": [
-        ":vendor_name",
+        "deegitalbe",
         "laravel",
-        ":package_slug"
+        "trustup-pro-notifier"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/deegitalbe/trustup-pro-notifier",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Deegital",
+            "email": "florian.husquinet@deegital.be",
             "role": "Developer"
         }
     ],
@@ -34,13 +34,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Deegitalbe\\TrustupProNotifier\\": "src",
+            "Deegitalbe\\TrustupProNotifier\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Deegitalbe\\TrustupProNotifier\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -54,10 +54,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Deegitalbe\\TrustupProNotifier\\TrustupProNotifierServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "TrustupProNotifier": "Deegitalbe\\TrustupProNotifier\\Facades\\TrustupProNotifier"
             }
         }
     },

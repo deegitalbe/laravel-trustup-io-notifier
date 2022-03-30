@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Deegitalbe\TrustupProNotifier\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class TrustupProNotifierCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'trustup-pro-notifier';
 
     public $description = 'My command';
 
