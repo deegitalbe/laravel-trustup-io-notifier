@@ -18,7 +18,7 @@ abstract class TPNBaseChannel
         }
 
         if (method_exists($notifiable, $this->getRouteMethod())) {
-            return $notifiable->{$this->getRouteMethod()}();
+            return $notifiable->{$this->getRouteMethod()}($this);
         }
 
         return null;
