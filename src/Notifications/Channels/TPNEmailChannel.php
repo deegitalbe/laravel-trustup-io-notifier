@@ -54,7 +54,7 @@ class TPNEmailChannel extends TPNBaseChannel implements TPNChannelInterface
 
     public function addCustomSMTPParameters($notification, $message): array
     {
-        if ( ! method_exists($notification, 'getCustomSMTPParameters') ) {
+        if (! method_exists($notification, 'getCustomSMTPParameters')) {
             return $message;
         }
 
@@ -63,7 +63,7 @@ class TPNEmailChannel extends TPNBaseChannel implements TPNChannelInterface
         return $smtp
             ? array_merge($message, [
                 'custom_smtp' => $smtp,
-                'from'        => $smtp['username']
+                'from' => $smtp['username'],
             ])
             : $message;
     }
