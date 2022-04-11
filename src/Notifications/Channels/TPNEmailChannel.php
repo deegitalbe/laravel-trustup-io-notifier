@@ -42,8 +42,8 @@ class TPNEmailChannel extends TPNBaseChannel implements TPNChannelInterface
         return $this->addCustomSMTPParameters($notification, [
             'cc' => implode(',', $message->cc ?? []) ?? null,
             'bcc' => implode(',', $message->bcc ?? []) ?? null,
-            'from' => $message->from[0],
-            'from_name' => $message->from[1] ?? null,
+            'from' => $message->from[0] ?? config('mail.from.address'),
+            'from_name' => $message->from[1] ?? config('mail.from.name'),
             'reply_to' => $replyTo ? $replyTo[0] : null,
             'reply_to_name' => $replyTo ? $replyTo[1] : null,
             'subject' => $message->subject,
