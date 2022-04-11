@@ -3,6 +3,7 @@
 namespace Deegitalbe\TrustupProNotifier\Notifications\Channels;
 
 use Exception;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -51,8 +52,8 @@ abstract class TPNBaseChannel
                     $message,
                     [
                         'to' => $this->getTo($message, $notifiable),
-                        'notifiable_id' => optional($notifiable)->id,
-                        'notifiable_type' => optional($notifiable)->getMorphClass(),
+                        'notifiable_id' => $this->getNotifiableId($notifiable),
+                        'notifiable_type' => $this->getNotifiableType($notifiable),
                         'notification_class' => get_class($notification),
                     ]
                 )
@@ -70,4 +71,19 @@ abstract class TPNBaseChannel
             ]);
         }
     }
+    
+    public function getNotifiableId($notifiable)
+    {
+        return $notifiable instanceof Model
+            ? $notifiable->id
+            : null;
+    }
+
+    public function getNotifiableType($notifiable)
+    {
+        return $notifiable instanceof Model
+            ? $notifiable->getMorphClass()
+            : get_class($notifiable);
+    }
+
 }
