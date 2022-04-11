@@ -71,7 +71,7 @@ abstract class TPNBaseChannel
             ]);
         }
     }
-    
+
     public function getNotifiableId($notifiable)
     {
         return $notifiable instanceof Model
@@ -85,5 +85,4 @@ abstract class TPNBaseChannel
             ? $notifiable->getMorphClass()
             : get_class($notifiable);
     }
-
 }
