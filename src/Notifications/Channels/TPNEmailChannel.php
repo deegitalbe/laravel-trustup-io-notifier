@@ -24,21 +24,21 @@ class TPNEmailChannel extends TPNBaseChannel implements TPNChannelInterface
 
     public function transformMessageToArray($message): array
     {
-        if ( is_array($message) ) {
+        if (is_array($message)) {
             return $message;
         }
 
-        if ( ! $message instanceof MailMessage ) {
+        if (! $message instanceof MailMessage) {
             throw new Exception('Cannot send email notification because the method returns neither an array nor a MailMessage instance.');
         }
 
         $replyTo = $message->replyTo[0] ?? null;
-        
+
         $plain = null;
-        if ( is_array($message->view) && $message->view[1] ) {
+        if (is_array($message->view) && $message->view[1]) {
             $plain = view($message->view[1], $message->data())->render();
         }
-        
+
         return [
             'cc' => implode(',', $message->cc ?? []) ?? null,
             'bcc' => implode(',', $message->bcc ?? []) ?? null,
@@ -48,7 +48,7 @@ class TPNEmailChannel extends TPNBaseChannel implements TPNChannelInterface
             'reply_to_name' => $replyTo ? $replyTo[1] : null,
             'subject' => $message->subject,
             'html' => (string) $message->render(),
-            'plain' => $plain
+            'plain' => $plain,
         ];
     }
 }

@@ -19,7 +19,7 @@ abstract class TPNBaseChannel
             return $message['to'];
         }
 
-        if ( $notifiable instanceof AnonymousNotifiable ) {
+        if ($notifiable instanceof AnonymousNotifiable) {
             return $notifiable->routes['tpn_'.$this->getType()];
         }
 
@@ -69,7 +69,7 @@ abstract class TPNBaseChannel
             ]);
         }
     }
-    
+
     public function transformMessageToArray($message): array
     {
         return $message;
@@ -87,7 +87,7 @@ abstract class TPNBaseChannel
             ]
         );
     }
-    
+
     public function getNotifiableId($notifiable)
     {
         return $notifiable instanceof Model
