@@ -4,6 +4,7 @@ namespace Deegitalbe\TrustupProNotifier\Notifications\Channels;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -16,6 +17,10 @@ abstract class TPNBaseChannel
     {
         if (isset($message['to']) && $message['to']) {
             return $message['to'];
+        }
+
+        if ( $notifiable instanceof AnonymousNotifiable ) {
+            return $notifiable->routes['tpn_'.$this->getType()];
         }
 
         if ($notifiable && method_exists($notifiable, $this->getRouteMethod())) {
@@ -36,6 +41,7 @@ abstract class TPNBaseChannel
     {
         $method = $this->getMethod();
         $message = $notification->{$method}($notifiable);
+        $message = $this->transformMessageToArray($message);
 
         if (! isset($message['uuid'])) {
             $message['uuid'] = (string) Uuid::uuid4();
@@ -48,15 +54,7 @@ abstract class TPNBaseChannel
                 'X-App-Key' => config('trustup-pro-notifier.key'),
             ])->post(
                 config('trustup-pro-notifier.url').'/api/notify/'.$this->getType(),
-                array_merge(
-                    $message,
-                    [
-                        'to' => $this->getTo($message, $notifiable),
-                        'notifiable_id' => $this->getNotifiableId($notifiable),
-                        'notifiable_type' => $this->getNotifiableType($notifiable),
-                        'notification_class' => get_class($notification),
-                    ]
-                )
+                $this->getBody($message, $notification, $notifiable)
             );
 
         if (! $response->ok()) {
@@ -70,6 +68,24 @@ abstract class TPNBaseChannel
                 'uuid' => $message['uuid'],
             ]);
         }
+    }
+    
+    public function transformMessageToArray($message): array
+    {
+        return $message;
+    }
+
+    public function getBody($message, $notification, $notifiable): array
+    {
+        return array_merge(
+            $message,
+            [
+                'to' => $this->getTo($message, $notifiable),
+                'notifiable_id' => $this->getNotifiableId($notifiable),
+                'notifiable_type' => $this->getNotifiableType($notifiable),
+                'notification_class' => get_class($notification),
+            ]
+        );
     }
     
     public function getNotifiableId($notifiable)
