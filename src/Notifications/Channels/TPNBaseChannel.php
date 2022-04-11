@@ -101,5 +101,4 @@ abstract class TPNBaseChannel
             ? $notifiable->getMorphClass()
             : get_class($notifiable);
     }
-
 }
