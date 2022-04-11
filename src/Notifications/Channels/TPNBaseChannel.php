@@ -19,7 +19,7 @@ abstract class TPNBaseChannel
             return $message['to'];
         }
 
-        if ( $notifiable instanceof AnonymousNotifiable ) {
+        if ($notifiable instanceof AnonymousNotifiable) {
             return $notifiable->routes['tpn_'.$this->getType()];
         }
 
@@ -41,7 +41,7 @@ abstract class TPNBaseChannel
     {
         $method = $this->getMethod();
         $message = $notification->{$method}($notifiable);
-        $message = $this->transformMessageToArray($message);
+        $message = $this->transformMessageToArray($notification, $message);
 
         if (! isset($message['uuid'])) {
             $message['uuid'] = (string) Uuid::uuid4();
@@ -69,8 +69,8 @@ abstract class TPNBaseChannel
             ]);
         }
     }
-    
-    public function transformMessageToArray($message): array
+
+    public function transformMessageToArray($notification, $message): array
     {
         return $message;
     }
@@ -87,7 +87,7 @@ abstract class TPNBaseChannel
             ]
         );
     }
-    
+
     public function getNotifiableId($notifiable)
     {
         return $notifiable instanceof Model
