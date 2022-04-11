@@ -17,7 +17,7 @@ abstract class TPNBaseChannel
             return $message['to'];
         }
 
-        if (method_exists($notifiable, $this->getRouteMethod())) {
+        if ($notifiable && method_exists($notifiable, $this->getRouteMethod())) {
             return $notifiable->{$this->getRouteMethod()}($this);
         }
 
@@ -51,8 +51,8 @@ abstract class TPNBaseChannel
                     $message,
                     [
                         'to' => $this->getTo($message, $notifiable),
-                        'notifiable_id' => $notifiable->id,
-                        'notifiable_type' => $notifiable->getMorphClass(),
+                        'notifiable_id' => optional($notifiable)->id,
+                        'notifiable_type' => optional($notifiable)->getMorphClass(),
                         'notification_class' => get_class($notification),
                     ]
                 )
