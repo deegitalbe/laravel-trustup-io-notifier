@@ -61,13 +61,17 @@ abstract class TPNBaseChannel
             throw new Exception('Could not send notification ['.$this->getType().'] via ' . config('trustup-pro-notifier.url'));
         }
 
-        if (Schema::hasTable('notification_log_uuids')) {
-            DB::table('notification_log_uuids')->insert([
-                'notification_id' => $notification->id,
-                'driver' => $this->getType(),
-                'uuid' => $message['uuid'],
-            ]);
+        if ( ! Schema::hasTable('notification_log_uuids') ) {
+            return;
         }
+
+        DB::table('notification_log_uuids')->insert([
+            'notification_id' => $notification->id,
+            'driver'          => $this->getType(),
+            'uuid'            => $message['uuid'],
+            'created_at'      => now()->toDateTimeString(),
+            'updated_at'      => now()->toDateTimeString(),
+        ]);
     }
 
     public function transformMessageToArray($notification, $message): array

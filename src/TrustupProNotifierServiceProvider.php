@@ -2,13 +2,15 @@
 
 namespace Deegitalbe\TrustupProNotifier;
 
+use Illuminate\Support\Facades\Event;
+use Spatie\LaravelPackageTools\Package;
+use Illuminate\Support\Facades\Notification;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Deegitalbe\TrustupProNotifier\Events\NewEventWebhookReceived;
+use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNSMSChannel;
+use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNPushChannel;
 use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNEmailChannel;
 use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNLetterChannel;
-use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNPushChannel;
-use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNSMSChannel;
-use Illuminate\Support\Facades\Notification;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class TrustupProNotifierServiceProvider extends PackageServiceProvider
 {
@@ -22,7 +24,8 @@ class TrustupProNotifierServiceProvider extends PackageServiceProvider
         $package
             ->name('trustup-pro-notifier')
             ->hasConfigFile()
-            ->hasMigration('create_notification_log_uuids_table');
+            ->hasMigration('create_notification_log_uuids_table')
+            ->hasRoute('webhooks');
     }
 
     public function packageBooted()
@@ -42,5 +45,12 @@ class TrustupProNotifierServiceProvider extends PackageServiceProvider
         Notification::extend('tpn_push', function ($app) {
             return new TPNPushChannel();
         });
+
+        if ( config('trustup-pro-notifier.webhooks.new-event.enabled') ) {
+            Event::listen(
+                NewEventWebhookReceived::class,
+                [config('trustup-pro-notifier.webhooks.new-event.listener'), 'handle']
+            );
+        }
     }
 }

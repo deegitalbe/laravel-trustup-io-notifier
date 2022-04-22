@@ -49,6 +49,7 @@ class TPNEmailChannel extends TPNBaseChannel implements TPNChannelInterface
             'subject' => $message->subject,
             'html' => (string) $message->render(),
             'plain' => $plain,
+            'headers' => method_exists($notification, 'getHeaders') ? $notification->getHeaders() : null
         ]);
     }
 
