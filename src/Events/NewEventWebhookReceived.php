@@ -8,12 +8,14 @@ use Illuminate\Queue\SerializesModels;
 
 class NewEventWebhookReceived
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
-    
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
+
     public function __construct(
         public array $log,
         public array $event,
         public array $data
-    ) {}
-
+    ) {
+    }
 }

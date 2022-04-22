@@ -2,15 +2,15 @@
 
 namespace Deegitalbe\TrustupProNotifier;
 
-use Illuminate\Support\Facades\Event;
-use Spatie\LaravelPackageTools\Package;
-use Illuminate\Support\Facades\Notification;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Deegitalbe\TrustupProNotifier\Events\NewEventWebhookReceived;
-use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNSMSChannel;
-use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNPushChannel;
 use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNEmailChannel;
 use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNLetterChannel;
+use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNPushChannel;
+use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNSMSChannel;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Notification;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class TrustupProNotifierServiceProvider extends PackageServiceProvider
 {
@@ -46,7 +46,7 @@ class TrustupProNotifierServiceProvider extends PackageServiceProvider
             return new TPNPushChannel();
         });
 
-        if ( config('trustup-pro-notifier.webhooks.new-event.enabled') ) {
+        if (config('trustup-pro-notifier.webhooks.new-event.enabled')) {
             Event::listen(
                 NewEventWebhookReceived::class,
                 [config('trustup-pro-notifier.webhooks.new-event.listener'), 'handle']
