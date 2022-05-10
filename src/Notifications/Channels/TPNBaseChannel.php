@@ -13,7 +13,7 @@ use Ramsey\Uuid\Uuid;
 
 abstract class TPNBaseChannel
 {
-    public function getTo(array $message, $notifiable): ?string
+    public function getTo(array $message, $notifiable, Notification $notification): ?string
     {
         if (isset($message['to']) && $message['to']) {
             return $message['to'];
@@ -24,7 +24,7 @@ abstract class TPNBaseChannel
         }
 
         if ($notifiable && method_exists($notifiable, $this->getRouteMethod())) {
-            return $notifiable->{$this->getRouteMethod()}($this);
+            return $notifiable->{$this->getRouteMethod()}($notification);
         }
 
         return null;
@@ -84,7 +84,7 @@ abstract class TPNBaseChannel
         return array_merge(
             $message,
             [
-                'to' => $this->getTo($message, $notifiable),
+                'to' => $this->getTo($message, $notifiable, $notification),
                 'notifiable_id' => $this->getNotifiableId($notifiable),
                 'notifiable_type' => $this->getNotifiableType($notifiable),
                 'notification_class' => get_class($notification),
