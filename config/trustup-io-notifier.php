@@ -4,9 +4,9 @@ return [
 
     /**
      * Sets at which URL the notifier is accessible.
-     * Default value: https://notifier.trustup.pro
+     * Default value: https://notifier.trustup.io
      */
-    'url' => env('TPN_URL', 'https://notifier.trustup.pro'),
+    'url' => env('TPN_URL', 'https://notifier.trustup.io'),
 
     /**
      * App name (default, invoicing...).
