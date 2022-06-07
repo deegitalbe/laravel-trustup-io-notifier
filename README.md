@@ -3,10 +3,10 @@
 
 # Trustup Pro Notifier
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/deegitalbe/trustup-pro-notifier.svg?style=flat-square)](https://packagist.org/packages/deegitalbe/trustup-pro-notifier)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/deegitalbe/trustup-pro-notifier/run-tests?label=tests)](https://github.com/deegitalbe/trustup-pro-notifier/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/deegitalbe/trustup-pro-notifier/Check%20&%20fix%20styling?label=code%20style)](https://github.com/deegitalbe/trustup-pro-notifier/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/deegitalbe/trustup-pro-notifier.svg?style=flat-square)](https://packagist.org/packages/deegitalbe/trustup-pro-notifier)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/deegitalbe/laravel-trustup-io-notifier.svg?style=flat-square)](https://packagist.org/packages/deegitalbe/laravel-trustup-io-notifier)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/deegitalbe/laravel-trustup-io-notifier/run-tests?label=tests)](https://github.com/deegitalbe/laravel-trustup-io-notifier/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/deegitalbe/laravel-trustup-io-notifier/Check%20&%20fix%20styling?label=code%20style)](https://github.com/deegitalbe/laravel-trustup-io-notifier/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/deegitalbe/laravel-trustup-io-notifier.svg?style=flat-square)](https://packagist.org/packages/deegitalbe/laravel-trustup-io-notifier)
 
 Easily send notifications through a centralized notifier instance. Supports emails (Postmak), sms (Vonage/Nexmo), postal letters (Postbird) and push (FCM) via custom notification channels that are easy to use. A single app name and token are enough to use all these channels.
 
@@ -15,20 +15,20 @@ Easily send notifications through a centralized notifier instance. Supports emai
 You can install the package via composer:
 
 ```bash
-composer require deegitalbe/trustup-pro-notifier
+composer require deegitalbe/laravel-trustup-io-notifier
 ```
 
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag="trustup-pro-notifier-migrations"
+php artisan vendor:publish --tag="laravel-trustup-io-notifier-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="trustup-pro-notifier-config"
+php artisan vendor:publish --tag="laravel-trustup-io-notifier-config"
 ```
 
 This is the contents of the published config file:
@@ -38,9 +38,9 @@ return [
 
     /**
      * Sets at which URL the notifier is accessible.
-     * Default value: https://notifier.trustup.pro
+     * Default value: https://notifier.trustup.io
      */
-    'url' => env('TPN_URL', 'https://notifier.trustup.pro'),
+    'url' => env('TPN_URL', 'https://notifier.trustup.io'),
 
     /**
      * App name (default, invoicing...).

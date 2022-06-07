@@ -1,6 +1,6 @@
 <?php
 
-namespace Deegitalbe\TrustupProNotifier\Notifications\Channels;
+namespace Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels;
 
 class TPNLetterChannel extends TPNBaseChannel implements TPNChannelInterface
 {

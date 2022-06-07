@@ -1,8 +1,8 @@
 <?php
 
-namespace Deegitalbe\TrustupProNotifier\Jobs;
+namespace Deegitalbe\LaravelTrustUpIoNotifier\Jobs;
 
-use Deegitalbe\TrustupProNotifier\Events\NewEventWebhookReceived;
+use Deegitalbe\LaravelTrustUpIoNotifier\Events\NewEventWebhookReceived;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -46,10 +46,10 @@ class HandleNewEventWebhook implements ShouldQueue
         $response = Http::acceptJson()
             ->withoutVerifying()
             ->withHeaders([
-                'X-App-Name' => config('trustup-pro-notifier.app'),
-                'X-App-Key' => config('trustup-pro-notifier.key'),
+                'X-App-Name' => config('trustup-io-notifier.app'),
+                'X-App-Key' => config('trustup-io-notifier.key'),
             ])->get(
-                config('trustup-pro-notifier.url').'/api/logs/'.$this->data['log_uuid'],
+                config('trustup-io-notifier.url').'/api/logs/'.$this->data['log_uuid'],
             );
 
         if (! $response->ok()) {
@@ -64,10 +64,10 @@ class HandleNewEventWebhook implements ShouldQueue
         $response = Http::acceptJson()
             ->withoutVerifying()
             ->withHeaders([
-                'X-App-Name' => config('trustup-pro-notifier.app'),
-                'X-App-Key' => config('trustup-pro-notifier.key'),
+                'X-App-Name' => config('trustup-io-notifier.app'),
+                'X-App-Key' => config('trustup-io-notifier.key'),
             ])->get(
-                config('trustup-pro-notifier.url').'/api/logs/'.$this->data['log_uuid'].'/events/'.$this->data['log_event_uuid'],
+                config('trustup-io-notifier.url').'/api/logs/'.$this->data['log_uuid'].'/events/'.$this->data['log_event_uuid'],
             );
 
         if (! $response->ok()) {

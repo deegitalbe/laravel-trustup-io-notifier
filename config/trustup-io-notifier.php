@@ -35,7 +35,7 @@ return [
              * The notifier will then send a webhook to the app using this package with the uuids of the related models + the data.
              * Please note that the default listener does nothing, while the webhook is still processed. Either change this value or disable it.
              */
-            'listener' => \Deegitalbe\TrustupProNotifier\Listeners\LogNewEvent::class
+            'listener' => \Deegitalbe\LaravelTrustUpIoNotifier\Listeners\LogNewEvent::class
         ]
     ]
 ];

@@ -1,5 +1,5 @@
 <?php
 
-use Deegitalbe\TrustupProNotifier\Tests\TestCase;
+use Deegitalbe\LaravelTrustUpIoNotifier\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

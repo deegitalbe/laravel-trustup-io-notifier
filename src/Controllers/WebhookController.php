@@ -1,8 +1,8 @@
 <?php
 
-namespace Deegitalbe\TrustupProNotifier\Controllers;
+namespace Deegitalbe\LaravelTrustUpIoNotifier\Controllers;
 
-use Deegitalbe\TrustupProNotifier\Jobs\HandleNewEventWebhook;
+use Deegitalbe\LaravelTrustUpIoNotifier\Jobs\HandleNewEventWebhook;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 

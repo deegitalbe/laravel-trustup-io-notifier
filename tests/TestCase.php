@@ -1,8 +1,8 @@
 <?php
 
-namespace Deegitalbe\TrustupProNotifier\Tests;
+namespace Deegitalbe\LaravelTrustUpIoNotifier\Tests;
 
-use Deegitalbe\TrustupProNotifier\TrustupProNotifierServiceProvider;
+use Deegitalbe\LaravelTrustUpIoNotifier\LaravelTrustUpIoNotifierServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -13,14 +13,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Deegitalbe\\TrustupProNotifier\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Deegitalbe\\LaravelTrustUpIoNotifier\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            TrustupProNotifierServiceProvider::class,
+            LaravelTrustUpIoNotifierServiceProvider::class,
         ];
     }
 
@@ -29,7 +29,7 @@ class TestCase extends Orchestra
         config()->set('database.default', 'testing');
 
         /*
-        $migration = include __DIR__.'/../database/migrations/create_trustup-pro-notifier_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_laravel-trustup-io-notifier_table.php.stub';
         $migration->up();
         */
     }

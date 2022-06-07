@@ -1,6 +1,6 @@
 <?php
 
-namespace Deegitalbe\TrustupProNotifier\Notifications\Channels;
+namespace Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels;
 
 use Exception;
 use Illuminate\Notifications\Messages\MailMessage;

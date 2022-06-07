@@ -1,6 +1,6 @@
 <?php
 
-namespace Deegitalbe\TrustupProNotifier\Database\Factories;
+namespace Deegitalbe\LaravelTrustUpIoNotifier\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

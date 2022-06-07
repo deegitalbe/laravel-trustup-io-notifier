@@ -1,12 +1,12 @@
 {
-    "name": "deegitalbe/trustup-pro-notifier",
-    "description": "This is my package trustup-pro-notifier",
+    "name": "deegitalbe/laravel-trustup-io-notifier",
+    "description": "This is my package laravel-trustup-io-notifier",
     "keywords": [
         "deegitalbe",
         "laravel",
-        "trustup-pro-notifier"
+        "laravel-trustup-io-notifier"
     ],
-    "homepage": "https://github.com/deegitalbe/trustup-pro-notifier",
+    "homepage": "https://github.com/deegitalbe/laravel-trustup-io-notifier",
     "license": "MIT",
     "authors": [
         {
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Deegitalbe\\TrustupProNotifier\\": "src",
-            "Deegitalbe\\TrustupProNotifier\\Database\\Factories\\": "database/factories"
+            "Deegitalbe\\LaravelTrustUpIoNotifier\\": "src",
+            "Deegitalbe\\LaravelTrustUpIoNotifier\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Deegitalbe\\TrustupProNotifier\\Tests\\": "tests"
+            "Deegitalbe\\LaravelTrustUpIoNotifier\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -55,10 +55,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Deegitalbe\\TrustupProNotifier\\TrustupProNotifierServiceProvider"
+                "Deegitalbe\\LaravelTrustUpIoNotifier\\LaravelTrustUpIoNotifierServiceProvider"
             ],
             "aliases": {
-                "TrustupProNotifier": "Deegitalbe\\TrustupProNotifier\\Facades\\TrustupProNotifier"
+                "LaravelTrustUpIoNotifier": "Deegitalbe\\LaravelTrustUpIoNotifier\\Facades\\LaravelTrustUpIoNotifier"
             }
         }
     },

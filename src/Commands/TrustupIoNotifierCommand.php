@@ -1,12 +1,12 @@
 <?php
 
-namespace Deegitalbe\TrustupProNotifier\Commands;
+namespace Deegitalbe\LaravelTrustUpIoNotifier\Commands;
 
 use Illuminate\Console\Command;
 
-class TrustupProNotifierCommand extends Command
+class LaravelTrustUpIoNotifierCommand extends Command
 {
-    public $signature = 'trustup-pro-notifier';
+    public $signature = 'laravel-trustup-io-notifier';
 
     public $description = 'My command';
 

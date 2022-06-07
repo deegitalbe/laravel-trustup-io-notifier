@@ -1,6 +1,6 @@
 <?php
 
-namespace Deegitalbe\TrustupProNotifier\Notifications\Channels;
+namespace Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
@@ -50,15 +50,15 @@ abstract class TPNBaseChannel
         $response = Http::acceptJson()
             ->withoutVerifying()
             ->withHeaders([
-                'X-App-Name' => config('trustup-pro-notifier.app'),
-                'X-App-Key' => config('trustup-pro-notifier.key'),
+                'X-App-Name' => config('trustup-io-notifier.app'),
+                'X-App-Key' => config('trustup-io-notifier.key'),
             ])->post(
-                config('trustup-pro-notifier.url').'/api/notify/'.$this->getType(),
+                config('trustup-io-notifier.url').'/api/notify/'.$this->getType(),
                 $this->getBody($message, $notification, $notifiable)
             );
 
         if (! $response->ok()) {
-            throw new Exception('Could not send notification ['.$this->getType().'] via ' . config('trustup-pro-notifier.url'));
+            throw new Exception('Could not send notification ['.$this->getType().'] via ' . config('trustup-io-notifier.url'));
         }
 
         if (! Schema::hasTable('notification_log_uuids')) {

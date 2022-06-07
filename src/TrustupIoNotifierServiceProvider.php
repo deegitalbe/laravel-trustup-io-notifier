@@ -1,18 +1,18 @@
 <?php
 
-namespace Deegitalbe\TrustupProNotifier;
+namespace Deegitalbe\LaravelTrustUpIoNotifier;
 
-use Deegitalbe\TrustupProNotifier\Events\NewEventWebhookReceived;
-use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNEmailChannel;
-use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNLetterChannel;
-use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNPushChannel;
-use Deegitalbe\TrustupProNotifier\Notifications\Channels\TPNSMSChannel;
+use Deegitalbe\LaravelTrustUpIoNotifier\Events\NewEventWebhookReceived;
+use Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels\TPNEmailChannel;
+use Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels\TPNLetterChannel;
+use Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels\TPNPushChannel;
+use Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels\TPNSMSChannel;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class TrustupProNotifierServiceProvider extends PackageServiceProvider
+class LaravelTrustUpIoNotifierServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -22,7 +22,7 @@ class TrustupProNotifierServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('trustup-pro-notifier')
+            ->name('laravel-trustup-io-notifier')
             ->hasConfigFile()
             ->hasMigration('create_notification_log_uuids_table')
             ->hasRoute('webhooks');
@@ -46,10 +46,10 @@ class TrustupProNotifierServiceProvider extends PackageServiceProvider
             return new TPNPushChannel();
         });
 
-        if (config('trustup-pro-notifier.webhooks.new-event.enabled')) {
+        if (config('trustup-io-notifier.webhooks.new-event.enabled')) {
             Event::listen(
                 NewEventWebhookReceived::class,
-                [config('trustup-pro-notifier.webhooks.new-event.listener'), 'handle']
+                [config('trustup-io-notifier.webhooks.new-event.listener'), 'handle']
             );
         }
     }
