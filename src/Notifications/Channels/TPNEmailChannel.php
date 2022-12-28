@@ -3,6 +3,7 @@
 namespace Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels;
 
 use Exception;
+use Illuminate\Mail\Mailable;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class TPNEmailChannel extends TPNBaseChannel implements TPNChannelInterface
@@ -28,8 +29,12 @@ class TPNEmailChannel extends TPNBaseChannel implements TPNChannelInterface
             return $this->addCustomSMTPParameters($notification, $message);
         }
 
-        if (! $message instanceof MailMessage) {
+        if (! $message instanceof MailMessage && ! $message instanceof Mailable) {
             throw new Exception('Cannot send email notification because the method returns neither an array nor a MailMessage instance.');
+        }
+
+        if ( $message instanceof Mailable ) {
+            $message->build();
         }
 
         $replyTo = $message->replyTo[0] ?? null;
@@ -39,7 +44,13 @@ class TPNEmailChannel extends TPNBaseChannel implements TPNChannelInterface
             $plain = view($message->view[1], $message->data())->render();
         }
 
+        $to = null;
+        if ( $message instanceof Mailable ) {
+            $to = collect($message->to)->map(fn($to) => $to['address'])->join(',');
+        }
+
         return $this->addCustomSMTPParameters($notification, [
+            'to' => $to,
             'cc' => implode(',', $message->cc ?? []) ?? null,
             'bcc' => implode(',', $message->bcc ?? []) ?? null,
             'from' => $message->from[0] ?? config('mail.from.address'),
