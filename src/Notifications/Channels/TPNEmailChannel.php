@@ -55,13 +55,39 @@ class TPNEmailChannel extends TPNBaseChannel implements TPNChannelInterface
             'bcc' => implode(',', $message->bcc ?? []) ?? null,
             'from' => $message->from[0] ?? config('mail.from.address'),
             'from_name' => $message->from[1] ?? config('mail.from.name'),
-            'reply_to' => $replyTo ? $replyTo[0] : null,
-            'reply_to_name' => $replyTo ? $replyTo[1] : null,
+            'reply_to' => $this->getReplyTo($replyTo),
+            'reply_to_name' => $this->getReplyToName($replyTo),
             'subject' => $message->subject,
             'html' => (string) $message->render(),
             'plain' => $plain,
             'headers' => method_exists($notification, 'getHeaders') ? $notification->getHeaders() : null,
         ]);
+    }
+
+    public function getReplyTo(array $replyTo = null): ?string
+    {
+        if ( ! $replyTo ) {
+            return null;
+        }
+
+        if ( isset($replyTo['address']) ) {
+            return $replyTo['address'];
+        }
+
+        return $replyTo[0] ?? null;
+    }
+
+    public function getReplyToName(array $replyTo = null): ?string
+    {
+        if ( ! $replyTo ) {
+            return null;
+        }
+
+        if ( isset($replyTo['name']) ) {
+            return $replyTo['name'];
+        }
+
+        return $replyTo[0] ?? null;
     }
 
     public function addCustomSMTPParameters($notification, $message): array
