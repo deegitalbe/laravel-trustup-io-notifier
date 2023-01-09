@@ -2,15 +2,16 @@
 
 namespace Deegitalbe\LaravelTrustUpIoNotifier;
 
-use Deegitalbe\LaravelTrustUpIoNotifier\Events\NewEventWebhookReceived;
-use Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels\TPNEmailChannel;
-use Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels\TPNLetterChannel;
-use Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels\TPNPushChannel;
-use Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels\TPNSMSChannel;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Notification;
 use Spatie\LaravelPackageTools\Package;
+use Illuminate\Support\Facades\Notification;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Deegitalbe\LaravelTrustUpIoNotifier\Events\NewEventWebhookReceived;
+use Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels\TPNSMSChannel;
+use Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels\TPNPushChannel;
+use Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels\TPNEmailChannel;
+use Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels\TPNSlackChannel;
+use Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels\TPNLetterChannel;
 
 class LaravelTrustUpIoNotifierServiceProvider extends PackageServiceProvider
 {
@@ -44,6 +45,10 @@ class LaravelTrustUpIoNotifierServiceProvider extends PackageServiceProvider
 
         Notification::extend('tpn_push', function ($app) {
             return new TPNPushChannel();
+        });
+
+        Notification::extend('tpn_slack', function ($app) {
+            return new TPNSlackChannel();
         });
 
         if (config('trustup-io-notifier.webhooks.new-event.enabled')) {
