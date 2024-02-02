@@ -13,7 +13,10 @@ use Ramsey\Uuid\Uuid;
 
 abstract class TPNBaseChannel
 {
-    public function getTo(array $message, $notifiable, Notification $notification): ?string
+    /**
+     * @return string|null|array<string>
+     */
+    public function getTo(array $message, $notifiable, Notification $notification)
     {
         if (isset($message['to']) && $message['to']) {
             return $message['to'];
