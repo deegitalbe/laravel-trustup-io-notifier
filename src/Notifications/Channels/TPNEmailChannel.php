@@ -5,6 +5,7 @@ namespace Deegitalbe\LaravelTrustUpIoNotifier\Notifications\Channels;
 use Exception;
 use Illuminate\Mail\Mailable;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Arr;
 
 class TPNEmailChannel extends TPNBaseChannel implements TPNChannelInterface
 {
@@ -51,8 +52,8 @@ class TPNEmailChannel extends TPNBaseChannel implements TPNChannelInterface
 
         return $this->addCustomSMTPParameters($notification, [
             'to' => $to,
-            'cc' => implode(',', $message->cc ?? []) ?? null,
-            'bcc' => implode(',', $message->bcc ?? []) ?? null,
+            'cc' => implode(',', Arr::wrap($message->cc) ?? []) ?? null,
+            'bcc' => implode(',', Arr::wrap($message->bcc) ?? []) ?? null,
             'from' => $message->from[0] ?? config('mail.from.address'),
             'from_name' => $message->from[1] ?? config('mail.from.name'),
             'reply_to' => $this->getReplyTo($replyTo),
