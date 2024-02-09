@@ -50,10 +50,28 @@ class TPNEmailChannel extends TPNBaseChannel implements TPNChannelInterface
             $to = collect($message->to)->map(fn($to) => $to['address'])->join(',');
         }
 
+        $cc = [];
+        if ( is_array($message->cc) ) {
+            foreach ( $message->cc as $messageCC ) {
+                if ( is_array($messageCC) && isset($messageCC[0]) ) {
+                    $cc[] = $messageCC[0];
+                }
+            }
+        }
+
+        $bcc = [];
+        if ( is_array($message->bcc) ) {
+            foreach ( $message->bcc as $messageBCC ) {
+                if ( is_array($messageBCC) && isset($messageBCC[0]) ) {
+                    $bcc[] = $messageBCC[0];
+                }
+            }
+        }
+
         return $this->addCustomSMTPParameters($notification, [
             'to' => $to,
-            'cc' => implode(',', Arr::wrap($message->cc) ?? []) ?? null,
-            'bcc' => implode(',', Arr::wrap($message->bcc) ?? []) ?? null,
+            'cc' => implode(',', $cc) ?? null,
+            'bcc' => implode(',', $bcc) ?? null,
             'from' => $message->from[0] ?? config('mail.from.address'),
             'from_name' => $message->from[1] ?? config('mail.from.name'),
             'reply_to' => $this->getReplyTo($replyTo),
