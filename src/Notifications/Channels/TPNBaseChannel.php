@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
 use Ramsey\Uuid\Uuid;
+use Deegitalbe\LaravelTrustUpIoNotifier\Exceptions\TPNException;
 
 abstract class TPNBaseChannel
 {
