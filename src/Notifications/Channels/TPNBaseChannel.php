@@ -61,7 +61,7 @@ abstract class TPNBaseChannel
             );
 
         if (! $response->ok()) {
-            throw new Exception('Could not send notification ['.$this->getType().'] via ' . config('trustup-io-notifier.url'));
+            TPNException::failed($this->getType(), $response);
         }
 
         if (! Schema::hasTable('notification_log_uuids')) {
