@@ -8,6 +8,13 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/deegitalbe/laravel-trustup-io-notifier/Check%20&%20fix%20styling?label=code%20style)](https://github.com/deegitalbe/laravel-trustup-io-notifier/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/deegitalbe/laravel-trustup-io-notifier.svg?style=flat-square)](https://packagist.org/packages/deegitalbe/laravel-trustup-io-notifier)
 
+## Compatibility
+
+| Laravel | Package |
+|---|---|
+| 8.x / 9.x | 1.x |
+| 12.x | 2.x |
+
 Easily send notifications through a centralized notifier instance. Supports emails (Postmak), sms (Vonage/Nexmo), postal letters (Postbird) and push (FCM) via custom notification channels that are easy to use. A single app name and token are enough to use all these channels.
 
 ## Installation
